@@ -8,7 +8,19 @@
 	<title>Dwordle</title>
 </head>
 <body>
-	DWORDle by Por
-	<!-- -2147483648 to 2147483647 -->
+	<h2>DWORDle by Por</h2>
+	<div>
+		attempts left: <span id="left"></span>
+	</div>
+	<div>
+		<input id="guess" oninput="validateField()" />
+		<button onclick="check()" id="btn">Guess</button>
+		<button onclick="reset()" id="btn">New DWORD</button>
+	</div>
+	<div class="board" id="board"></div>
+	<script src="dwordle.js"></script>
+	<script>
+		initDwordle('guess', 'board', 'left', 'btn');
+	</script>
 </body>
 </html>

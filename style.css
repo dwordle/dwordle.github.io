@@ -1,5 +1,33 @@
 * {
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+body {
 	background-color: teal;
+}
+
+h2 {
 	color: tan;
-	padding: 30px;
+}
+
+.board-row {
+	display: flex;
+}
+
+.board-char {
+	padding: 10px;
+	margin: 3px;
+}
+
+.board-char.not-in-row {
+	background-color: white;
+}
+
+.board-char.in-row {
+	background-color: #aa0;
+}
+
+.board-char.exact {
+	background-color: #0a0;;
 }
