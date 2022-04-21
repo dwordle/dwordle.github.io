@@ -78,6 +78,7 @@ const reset = () => {
 	game.attempts = 6;
 	game.board = [];
 	game.guess.value = "";
+	validateField();
 	refresh();
 }
 
