@@ -104,5 +104,3 @@ const check = () => {
 	validateField();
 	refresh();
 }
-
-//
