@@ -100,5 +100,7 @@ const check = () => {
 		matches: getMatchArray(game.dwordArray, userCharArray)
 	});
 	--game.attempts;
+	game.guess.value = "";
+	validateField();
 	refresh();
 }
