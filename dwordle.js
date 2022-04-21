@@ -9,14 +9,14 @@ const randomDword = () => {
 	return num ? num : 1;
 }
 
-const hasMaxChars = (num, max) => num < 10**max;
+const hasMaxChars = (num, max) => num < 10 ** max;
 
 const dwordToCharArray = (dword) => {
 	num = Math.abs(dword);
 	let s = [];
 	for (let i = 0; i < MAX_CHARS; ++i) {
-		if (num >= 10**(MAX_CHARS - i - 1))
-			s[i] = Math.floor(num / 10**(MAX_CHARS - i - 1)) % 10;
+		if (num >= 10 ** (MAX_CHARS - i - 1))
+			s[i] = Math.floor(num / 10 ** (MAX_CHARS - i - 1)) % 10;
 		else
 			s[i] = (i == 0 && dword < 0) ? "-" : "0";
 	}
@@ -39,5 +39,4 @@ const getMatchArray = (generatedCharArray, userCharArray) => {
 		}
 	}
 	return matches;
-	//TODO test
 }
