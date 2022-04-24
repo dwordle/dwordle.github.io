@@ -31,20 +31,29 @@ const stringToCharArray = string => {
 	return arr;
 }
 
-const getMatchArray = (generatedCharArray, userCharArray) => {
+//jeszcze nie do końca np. jeśli jest jedna dwójka i podamy na złym
+//(wcześniejszym) i dobrym, pierwsza powinna być biała, druga zielona
+const getMatchArray = (generatedCharArray, frequency, userCharArray) => {
 	let matches = [];
-	for (let i = 0; i < MAX_CHARS; ++i) {
-		if (generatedCharArray[i] === userCharArray[i])
+	frequency = { ...frequency };
+	console.log(frequency);
+	for (let i = 0; i < MAX_CHARS; ++i)
+		if (generatedCharArray[i] === userCharArray[i]) {
 			matches[i] = EXACT;
-		else {
+			--frequency[userCharArray[i]];
+		}
+	for (let i = 0; i < MAX_CHARS; ++i) {
+		let currentChar = userCharArray[i];
+		if (frequency[currentChar] > 0 && matches[i] != EXACT) {
 			for (let j = 0; j < MAX_CHARS; ++j)
-				if (generatedCharArray[j] === userCharArray[i]) {
+				if (generatedCharArray[j] === currentChar) {
 					matches[i] = IN_WORD;
 					break;
 				}
-			if (matches[i] != IN_WORD)
-				matches[i] = NOT_IN_WORD;
+			--frequency[currentChar];
 		}
+		if (matches[i] != IN_WORD && matches[i] != EXACT)
+			matches[i] = NOT_IN_WORD;
 	}
 	return matches;
 }
@@ -71,10 +80,20 @@ const refresh = () => {
 	}
 }
 
+const getFrequency = (array) => {
+	let chars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	chars["-"] = 0;
+	for (let char of array)
+		++chars[char];
+	return chars;
+}
+
 const reset = () => {
 	let dword = randomDword();
 	console.log(dword);
 	game.dwordArray = dwordToCharArray(dword);
+	game.frequency = getFrequency(game.dwordArray);
+	console.log(game.frequency);
 	game.attempts = 6;
 	game.board = [];
 	game.guess.value = "";
@@ -97,7 +116,7 @@ const check = () => {
 	let userCharArray = stringToCharArray(game.guess.value);
 	game.board.push({
 		chars: userCharArray,
-		matches: getMatchArray(game.dwordArray, userCharArray)
+		matches: getMatchArray(game.dwordArray, game.frequency, userCharArray)
 	});
 	--game.attempts;
 	game.guess.value = "";
