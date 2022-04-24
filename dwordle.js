@@ -31,8 +31,6 @@ const stringToCharArray = string => {
 	return arr;
 }
 
-//jeszcze nie do końca np. jeśli jest jedna dwójka i podamy na złym
-//(wcześniejszym) i dobrym, pierwsza powinna być biała, druga zielona
 const getMatchArray = (generatedCharArray, frequency, userCharArray) => {
 	let matches = [];
 	frequency = { ...frequency };
